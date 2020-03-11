@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 import { GET_PROFILE, PROFILE_ERROR } from './types';
-import { setAlert } from './alert';
+// import { setAlert } from './alert';
 
 const url = process.env.REACT_APP_BACKEND_URL;
 
