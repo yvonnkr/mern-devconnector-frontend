@@ -21,7 +21,11 @@ if (localStorage.token) {
 
 const App = () => {
   useEffect(() => {
-    store.dispatch(loadUser());
+    // store.dispatch(loadUser());
+
+    if (localStorage.token) {
+      store.dispatch(loadUser());
+    }
   }, []);
 
   return (

@@ -1,6 +1,8 @@
 import React, { useState, Fragment } from 'react';
-import { Link } from 'react-router-dom';
-// import { useSelector, useDispatch } from 'react-redux';
+import { Link, withRouter } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+
+import { createProfile } from '../../actions/profile';
 
 const formInitialInputs = {
   company: '',
@@ -17,9 +19,11 @@ const formInitialInputs = {
   instagram: ''
 };
 
-const CreateProfile = () => {
+const CreateProfile = props => {
   const [formData, setFormData] = useState(formInitialInputs);
   const [displaySocialInputs, toggleSocialInputs] = useState(false);
+
+  const dispatch = useDispatch();
 
   const {
     company,
@@ -42,9 +46,7 @@ const CreateProfile = () => {
   const onSubmitHandler = e => {
     e.preventDefault();
 
-    console.log(formData);
-
-    //    createProfile(formData, history); //create action / reducer
+    dispatch(createProfile(formData, props.history));
   };
 
   return (
@@ -224,4 +226,4 @@ const CreateProfile = () => {
   );
 };
 
-export default CreateProfile;
+export default withRouter(CreateProfile);
