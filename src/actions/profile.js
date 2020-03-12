@@ -37,9 +37,11 @@ export const createProfile = (
 
     dispatch(setAlert(edit ? 'Profile Updated' : 'Profile Created', 'success'));
 
-    if (!edit) {
-      history.push('/dashboard'); //redirect via history object
-    }
+    history.push('/dashboard'); //redirect via history object
+
+    // if (!edit) {
+    //   history.push('/dashboard'); //redirect via history object
+    // }
   } catch (err) {
     const errors = err.response.data.errors;
     if (errors) {

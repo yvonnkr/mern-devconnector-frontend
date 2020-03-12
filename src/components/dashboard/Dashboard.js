@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 import { getCurrentProfile } from './../../actions/profile';
 import Spinner from './../layout/Spinner';
+import DashboardActions from './DashboardActions';
 
 const Dashboard = () => {
   const { user } = useSelector(state => state.auth);
@@ -27,7 +28,7 @@ const Dashboard = () => {
 
       {profile !== null ? (
         <>
-          <h1>Your Profile</h1>
+          <DashboardActions />
         </>
       ) : (
         <>
