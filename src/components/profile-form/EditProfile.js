@@ -47,6 +47,7 @@ const EditProfile = ({ history }) => {
       youtube: loading || !profile.social ? '' : profile.social.youtube,
       instagram: loading || !profile.social ? '' : profile.social.instagram
     });
+    // eslint-disable-next-line
   }, [dispatch, loading]);
 
   const {

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { GET_PROFILE, PROFILE_ERROR } from './types';
+import { GET_PROFILE, PROFILE_ERROR, UPDATE_PROFILE } from './types';
 import { setAlert } from './alert';
 
 const url = process.env.REACT_APP_BACKEND_URL;
@@ -42,6 +42,58 @@ export const createProfile = (
     // if (!edit) {
     //   history.push('/dashboard'); //redirect via history object
     // }
+  } catch (err) {
+    const errors = err.response.data.errors;
+    if (errors) {
+      errors.forEach(e => dispatch(setAlert(e.msg, 'danger')));
+    }
+
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    });
+  }
+};
+
+//Add Experience
+export const addExperience = (formData, history) => async dispatch => {
+  try {
+    const res = await axios.put(`${url}/api/profile/experience`, formData);
+
+    dispatch({
+      type: UPDATE_PROFILE,
+      payload: res.data
+    });
+
+    dispatch(setAlert('Experience Added', 'success'));
+
+    history.push('/dashboard'); //redirect via history object
+  } catch (err) {
+    const errors = err.response.data.errors;
+    if (errors) {
+      errors.forEach(e => dispatch(setAlert(e.msg, 'danger')));
+    }
+
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    });
+  }
+};
+
+//Add Education
+export const addEducation = (formData, history) => async dispatch => {
+  try {
+    const res = await axios.put(`${url}/api/profile/education`, formData);
+
+    dispatch({
+      type: UPDATE_PROFILE,
+      payload: res.data
+    });
+
+    dispatch(setAlert('Education Added', 'success'));
+
+    history.push('/dashboard'); //redirect via history object
   } catch (err) {
     const errors = err.response.data.errors;
     if (errors) {
